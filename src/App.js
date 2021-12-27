@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import AQI from "./components/AQI/AQI";
+import Navbar from "./components/header/Navbar";
+import Login from "./components/login/Login";
+import SignUp from "./components/login/SignUp";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid">
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        showLogIn={setShowLogin}
+        handleIsloggedin={setIsLoggedIn}
+      />
+      {isLoggedIn ? <AQI /> : <>{showLogin ? <Login handleLoggedIn={setIsLoggedIn} /> : <SignUp handleLoggedIn={setIsLoggedIn} />}</>}
     </div>
   );
 }
